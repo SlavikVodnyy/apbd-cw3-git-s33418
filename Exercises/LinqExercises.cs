@@ -16,7 +16,9 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Task01_StudentsFromWarsaw()
     {
-        throw NotImplemented(nameof(Task01_StudentsFromWarsaw));
+        return UniversityData.Students
+            .Where(s=> s.City == "Warsaw")
+            .Select(st=> $"{st.IndexNumber} {st.FirstName}").ToList();
     }
 
     /// <summary>
@@ -30,7 +32,7 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Task02_StudentEmailAddresses()
     {
-        throw NotImplemented(nameof(Task02_StudentEmailAddresses));
+        return UniversityData.Students.Select(s => s.Email).ToList();
     }
 
     /// <summary>
@@ -45,7 +47,10 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Task03_StudentsSortedAlphabetically()
     {
-        throw NotImplemented(nameof(Task03_StudentsSortedAlphabetically));
+        return UniversityData.Students
+            .OrderBy(s => s.LastName)
+            .ThenBy(s => s.FirstName)
+            .Select(st => $"{st.IndexNumber} {st.FirstName} {st.LastName}").ToList();
     }
 
     /// <summary>
@@ -60,7 +65,10 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Task04_FirstAnalyticsCourse()
     {
-        throw NotImplemented(nameof(Task04_FirstAnalyticsCourse));
+        return [UniversityData.Courses
+            .Where(c => c.Category == "Analytics")
+            .Select(c => $"{c.Title} {c.StartDate}")
+            .FirstOrDefault() ?? "No course found in the Analytics category."];
     }
 
     /// <summary>
@@ -77,7 +85,9 @@ public sealed class LinqExercises
     /// </summary>
     public IEnumerable<string> Task05_IsThereAnyInactiveEnrollment()
     {
-        throw NotImplemented(nameof(Task05_IsThereAnyInactiveEnrollment));
+        return UniversityData.Enrollments
+            .Any(e => !e.IsActive)
+            .ToString();
     }
 
     /// <summary>
